@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Automated Matrix Inverter</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        body {
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .onboarding-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            padding: 45px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .onboarding-header {
+            margin-bottom: 35px;
+            padding: 30px 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+            border-radius: 18px;
+            position: relative;
+            animation: fadeIn 1s ease-out 0.2s both;
+            backdrop-filter: blur(10px);
+        }
+
+        .onboarding-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            z-index: 0;
+        }
+
+        .onboarding-header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+            border-radius: 0 0 10px 10px;
+            z-index: 1;
+        }
+
+        .onboarding-header h1 {
+            font-size: 2.4em;
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8),
+                         0 0 15px rgba(102, 126, 234, 0.25);
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+        }
+
+        .onboarding-header .subtitle {
+            font-size: 1.1em;
+            color: #4a5568;
+            font-weight: 500;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 1;
+            line-height: 1.4;
+        }
+
+        .description-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 28px 32px;
+            border-radius: 16px;
+            margin-bottom: 28px;
+            text-align: left;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .description-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .description-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.12);
+            border-left-color: #764ba2;
+        }
+
+        .description-section:hover::before {
+            left: 100%;
+        }
+
+        .description-section h2 {
+            color: #667eea;
+            margin-bottom: 16px;
+            font-size: 1.6em;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            line-height: 1.3;
+        }
+
+        .description-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+        }
+
+        .description-section:hover h2::after {
+            width: 100%;
+        }
+
+        .description-section p {
+            color: #495057;
+            line-height: 1.7;
+            font-size: 1em;
+            margin-bottom: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .description-section:hover p {
+            color: #343a40;
+        }
+
+        .description-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .how-it-works-section {
+            background: linear-gradient(135deg, #e7f3ff 0%, #f0f8ff 100%);
+            padding: 28px 32px;
+            border-radius: 16px;
+            margin-bottom: 35px;
+            text-align: left;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .how-it-works-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .how-it-works-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.12);
+            border-left-color: #764ba2;
+        }
+
+        .how-it-works-section:hover::before {
+            left: 100%;
+        }
+
+        .how-it-works-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            line-height: 1.3;
+        }
+
+        .how-it-works-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+        }
+
+        .how-it-works-section:hover h2::after {
+            width: 100%;
+        }
+
+        .how-it-works-section ol {
+            margin-left: 24px;
+            line-height: 1.8;
+            color: #495057;
+        }
+
+        .how-it-works-section li {
+            margin-bottom: 12px;
+            font-size: 1em;
+            opacity: 0;
+            animation: slideInLeft 0.6s ease-out forwards;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .how-it-works-section li:nth-child(1) { animation-delay: 0.7s; }
+        .how-it-works-section li:nth-child(2) { animation-delay: 0.8s; }
+        .how-it-works-section li:nth-child(3) { animation-delay: 0.9s; }
+        .how-it-works-section li:nth-child(4) { animation-delay: 1.0s; }
+        .how-it-works-section li:nth-child(5) { animation-delay: 1.1s; }
+
+        .how-it-works-section li:hover {
+            transform: translateX(10px);
+            color: #667eea;
+        }
+
+        .how-it-works-section li strong {
+            color: #667eea;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .how-it-works-section li:hover strong {
+            color: #764ba2;
+        }
+
+        .start-button {
+            padding: 16px 48px;
+            font-size: 1.15em;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 200% 200%;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 1.2s both, pulse 2s ease-in-out 2s infinite;
+        }
+
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .start-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .start-button:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+            background-position: 100% 0;
+        }
+
+        .start-button:active {
+            transform: translateY(-2px) scale(1.01);
+        }
+
+        .start-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Decorative elements */
+        .onboarding-container::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .onboarding-container::after {
+            content: '';
+            position: absolute;
+            bottom: -25px;
+            left: -25px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite 2s;
+        }
+
+        @media (max-width: 768px) {
+            .onboarding-container {
+                padding: 30px 25px;
+                margin: 15px;
+                border-radius: 16px;
+            }
+
+            .onboarding-header {
+                padding: 25px 25px;
+                margin-bottom: 28px;
+            }
+
+            .onboarding-header h1 {
+                font-size: 1.9em;
+                margin-bottom: 10px;
+            }
+
+            .onboarding-header .subtitle {
+                font-size: 1em;
+            }
+
+            .description-section, .how-it-works-section {
+                padding: 22px 24px;
+                margin-bottom: 22px;
+            }
+
+            .description-section h2, .how-it-works-section h2 {
+                font-size: 1.4em;
+                margin-bottom: 14px;
+            }
+
+            .description-section p {
+                font-size: 0.95em;
+                margin-bottom: 12px;
+            }
+
+            .how-it-works-section li {
+                font-size: 0.95em;
+                margin-bottom: 10px;
+            }
+
+            .start-button {
+                padding: 14px 36px;
+                font-size: 1.05em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="onboarding-container">
+        <div class="onboarding-header">
+            <h1>Automated Matrix Inverter</h1>
+            <p class="subtitle">Using RREF (Reduced Row Echelon Form) Algorithm</p>
+        </div>
+
+        <div class="description-section">
+            <h2>About This Program</h2>
+            <p>
+                Welcome to the Automated Matrix Inverter! This web application is designed to calculate the inverse 
+                of square matrices using the Reduced Row Echelon Form (RREF) algorithm. Whether you're working on 
+                linear algebra homework, solving systems of equations, or exploring matrix operations, this tool 
+                provides a quick and accurate way to find matrix inverses.
+            </p>
+            <p>
+                The program supports square matrices from 2×2 up to 10×10, making it suitable for a wide range 
+                of mathematical problems. Simply enter your matrix values, and the algorithm will automatically 
+                determine if the matrix is invertible and compute its inverse, or inform you if the matrix is singular.
+            </p>
+        </div>
+
+        <div class="how-it-works-section">
+            <h2>How It Works</h2>
+            <ol>
+                <li><strong>Enter a square matrix</strong> (n×n, where n ≤ 10) in the input grid</li>
+                <li><strong>Augmentation:</strong> The algorithm augments your matrix with an identity matrix: [A | I]</li>
+                <li><strong>RREF Transformation:</strong> Applies Reduced Row Echelon Form (RREF) to transform it to [I | A⁻¹]</li>
+                <li><strong>Inverse Extraction:</strong> If the left side becomes the identity matrix, the right side is the inverse</li>
+                <li><strong>Singular Detection:</strong> If the matrix is singular (non-invertible), the program displays "The matrix is Singular."</li>
+            </ol>
+        </div>
+
+        <button class="start-button" onclick="window.location.href='calculator.html'">
+            <span>Start Using the Calculator →</span>
+        </button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Matrix Inverter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Automated Matrix Inverter</h1>
+            <p class="subtitle">Using RREF (Reduced Row Echelon Form) Algorithm</p>
+        </header>
+
+        <div class="main-content">
+            <div class="input-section">
+                <div class="matrix-size-selector">
+                    <label for="matrix-size">Matrix Size (n×n):</label>
+                    <select id="matrix-size" onchange="createMatrixInput()">
+                        <option value="2">2×2</option>
+                        <option value="3" selected>3×3</option>
+                        <option value="4">4×4</option>
+                        <option value="5">5×5</option>
+                        <option value="6">6×6</option>
+                        <option value="7">7×7</option>
+                        <option value="8">8×8</option>
+                        <option value="9">9×9</option>
+                        <option value="10">10×10</option>
+                    </select>
+                </div>
+
+                <div class="matrix-container">
+                    <h3>Enter Matrix A:</h3>
+                    <div id="matrix-input" class="matrix-grid"></div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="calculateInverse()" class="btn-primary">Calculate Inverse</button>
+                    <button onclick="clearMatrix()" class="btn-secondary">Clear</button>
+                    <button onclick="fillExample()" class="btn-secondary">Fill Example</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h3>Result:</h3>
+                <div id="result-container">
+                    <p class="placeholder">Enter a matrix and click "Calculate Inverse"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="matrix-inverter.js"></script>
+</body>
+</html>
